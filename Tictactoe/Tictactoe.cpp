@@ -8,40 +8,53 @@ using namespace std;
 char player1[50];
 char player2[50];
 char square[3][3] = { '1','2','3','4','5','6','7','8','9' };
-char previoussquare[3][3] = { '1','2','3','4','5','6','7','8','9' };
+char mark = 'X';
+int player = 1;
 
 //Function prototype
-void input();
-void board();
-void play();
-int checkwin();
+void inputName();
+void printBoard();
+void playGame();
+int checkWin();
+void resetGame();
 
 int main()
 {
 	int mode;
+	char n;
 	cout << "Welcome To Tic-tac-toe game! Play with your way!" << endl
 		 << "If you find any problem, please contact vienhay123@gmail.com" << endl
 		 << "SELECT YOUR MODE (1 - PLAY GAME, OTHERS - EXIT GAME): ";
 	cin >> mode;
+	
 	if (mode==1)
 	{
-		play();
+		do
+		{
+			playGame();
+			cout << "Do you want to continue (y/ n)?: ";
+			cin >> n;
+			resetGame();
+		} while (n == 'y');
 	}
 	else
 	{
 	}
+	system("pause");
 	return 0;
 }
 
-void input()
+//Input player name
+void inputName()
 {
-	cout << "Enter Player 1 Name: ";
+	cout << "Enter player 1 Name: ";
 	cin >> player1;
-	cout << "Enter Player 2 Name: ";
+	cout << "Enter player 2 Name: ";
 	cin >> player2;
 }
 
-void board()
+//Display a board
+void printBoard()
 {
 	system("cls");
 	cout << "\nTic Tac Toe\n";
@@ -54,137 +67,71 @@ void board()
 		}
 		cout << endl;
 	}
-	/*cout << square[0][0] << "|" << square[0][1] << "|" << square[0][2] << endl;
-	cout << square[1][0] << "|" << square[1][1] << "|" << square[1][2] << endl;
-	cout << square[2][0] << "|" << square[2][1] << "|" << square[2][2] << endl;*/
 }
 
-void play()
+void playGame()
 {
-	input();
-	board();
-	int player = 1, choice, i;
-	char mark;
+	inputName();
+	printBoard();
+	
+	int choice, row, column;
+
 	do
 	{
-		board();
-		player = (player % 2) ? 1 : 2;
+		printBoard();
+		mark = (player % 2) ? 'X' : 'O';
 		cout << "Enter a number: ";
 		cin >> choice;
-		mark = (player == 1) ? 'X' : 'O';
-		if (choice == 1)
+		row = choice / 10 - 1;
+		column = choice % 10 - 1;
+		if (row < 3 && column < 3)
 		{
-			if (square[0][0] != 'X' && square[0][0] != 'O')
+			if (square[row][column] != 'X' && square[row][column] != 'O')
 			{
-				square[0][0] = mark;
+				square[row][column] = mark;
 				player++;
 			}
 		}
-		else if (choice == 2)
+		
+		printBoard();
+		if (checkWin() == 1)
 		{
-			if (square[0][1] != 'X' && square[0][1] != 'O')
-			{
-				square[0][1] = mark;
-				player++;
-			}
-		}
-		else if (choice == 3)
-		{
-			if (square[0][2] != 'X' && square[0][2] != 'O')
-			{
-				square[0][2] = mark;
-				player++;
-			}
-		}
-		else if (choice == 4)
-		{
-			if (square[1][0] != 'X' && square[1][0] != 'O')
-			{
-				square[1][0] = mark;
-				player++;
-			}
-		}
-		else if (choice == 5)
-		{
-			if (square[1][1] != 'X' && square[1][1] != 'O')
-			{
-				square[1][1] = mark;
-				player++;
-			}
-		}
-		else if (choice == 6)
-		{
-			if (square[1][2] != 'X' && square[1][2] != 'O')
-			{
-				square[1][2] = mark;
-				player++;
-			}
-		}
-		else if (choice == 7)
-		{
-			if (square[2][0] != 'X' && square[2][0] != 'O')
-			{
-				square[2][0] = mark;
-				player++;
-			}
-		}
-		else if (choice == 8)
-		{
-			if (square[2][1] != 'X' && square[2][1] != 'O')
-			{
-				square[2][1] = mark;
-				player++;
-			}
-		}
-		else if (choice == 9)
-		{
-			if (square[2][2] != 'X' && square[2][2] != 'O')
-			{
-				square[2][2] = mark;
-				player++;
-			}
-		}
-		board();
-		i = checkwin();
-		if (i == 1)
-		{
-			cout << player1 << " win" << endl;
-		}
-		else if (i == 2)
-		{
-			cout << player2 << " win" << endl;
+			(mark == 'X') ? cout << player1 : cout << player2;
+			cout << " win!" << endl;
 		}
 		else
 		{
-			cout << "Game draw" << endl;
+			cout << "Game draw!" << endl;
 		}
-	} while (i==-1);
+	} while (checkWin()==-1);
 
 }
 
-int checkwin()
+int checkWin()
 {
-	if (square[0][0]=='X' && square[0][1] == 'X' && square[0][2 ] == 'X' || square[1][0] == 'X' && square[1][1] == 'X' && square[1][2] == 'X' || square[2][0] == 'X' && square[2][1] == 'X' && square[2][2] == 'X' ||
-		square[0][0] == 'X' && square[1][0] == 'X' && square[2][0] == 'X' || square[0][1] == 'X' && square[1][1] == 'X' && square[2][1] == 'X' || square[0][2] == 'X' && square[1][2] == 'X' && square[2][2] == 'X' ||
-		square[0][0] == 'X' && square[1][1] == 'X' && square[2][2] == 'X' || square[0][2] == 'X' && square[1][1] == 'X' && square[2][0] == 'X')
+	for (int i = 0; i < 3; i++)
 	{
-		return 1;
+		if ((square[i][0] == mark && square[i][1] == mark && square[i][2] == mark)|| (square[0][i] == mark && square[1][i] == mark && square[2][i] == mark))
+		{
+			return 1;
+		}
+		if (square[1][1] == mark)
+		{
+			if ((square[0][0] == mark && square[2][2]==mark)||square[0][2] == mark && square[2][0] == mark)
+			{
+				return 1;
+			}
+		}
 	}
-	else if (square[0][0] == 'O' && square[0][1] == 'O' && square[0][2] == 'O' || square[1][0] == 'O' && square[1][1] == 'O' && square[1][2] == 'O' || square[2][0] == 'O' && square[2][1] == 'O' && square[2][2] == 'O' ||
-		square[0][0] == 'O' && square[1][0] == 'O' && square[2][0] == 'O' || square[0][1] == 'O' && square[1][1] == 'O' && square[2][1] == 'O' || square[0][2] == 'O' && square[1][2] == 'O' && square[2][2] == 'O' ||
-		square[0][0] == 'O' && square[1][1] == 'O' && square[2][2] == 'O' || square[0][2] == 'O' && square[1][1] == 'O' && square[2][0] == 'O')
-	{
+	if (player == 10)
 		return 2;
-	}
-	else if (square[0][0] != '1' && square[0][1] != '2' && square[0][2] != '3' && square[1][0] != '4' && square[1][1] != '5' && square[1][2] != '6' && square[2][0] != '7' && square[2][1] != '8' && square[2][2] != '9')
-	{
-		return 0;
-	}
 	return -1;
 }
 
-void newgame()
+void resetGame()
 {
+	player = 1;
+	char previoussquare[3][3] = { '1','2','3','4','5','6','7','8','9' };
 	for (int i = 0; i < 3; i++)
 	{
 		for (int j = 0; j < 3; j++)
