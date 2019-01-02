@@ -15,6 +15,7 @@ typedef vector<TY_Student> TY_StudentList;
 int input_number_of_students(void);
 void input_students_info(TY_StudentList* vList, int n);
 bool check_valid_id(TY_StudentList* vList, int n);
+void save_file(TY_StudentList* vList);
 
 int main()
 {
@@ -75,4 +76,21 @@ bool check_valid_id(TY_StudentList *vList, int n) {
 		}
 	}
 	return true;
+}
+
+void save_file(TY_StudentList *vList) {
+	ofstream fo;
+	fo.open("student_list.txt");
+	if (fo.fail()) {
+		cout << "File not found" << endl;
+	}
+	else {
+		for (auto tmp : *vList) {
+			fo << tmp.id << endl;
+			fo << tmp.name << endl;
+			fo << tmp.score << endl;
+		}
+		cout << "File write completed" << endl;
+	}
+	fo.close();
 }
