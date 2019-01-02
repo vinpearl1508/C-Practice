@@ -144,3 +144,15 @@ void print_menu() {
 	cout << "--------------------------------------------" << endl;
 	cout << "Choose: ";
 }
+
+void display_list(TY_StudentList *vList) {
+	if (vList->empty()) {
+		cout << "NO RECORDS" << endl;
+		return;
+	}
+		
+	cout << "ID" << "\t\t" << "FULL NAME" << "\t\t" << "SCORE" << endl;
+	for (auto tmp : *vList) {
+		cout << tmp.id << "\t\t" << tmp.name << "\t\t" << tmp.score << endl;
+	}
+}
