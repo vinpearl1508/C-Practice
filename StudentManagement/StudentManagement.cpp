@@ -14,6 +14,7 @@ typedef vector<TY_Student> TY_StudentList;
 
 int input_number_of_students(void);
 void input_students_info(TY_StudentList* vList, int n);
+bool check_valid_id(TY_StudentList* vList, int n);
 
 int main()
 {
@@ -40,6 +41,12 @@ void input_students_info(TY_StudentList* vList, int n)
 		cout << "Please input information of student " << i + 1 << endl;
 		cout << "Please input student id: ";
 		cin >> tmp.id;
+		while (check_valid_id(vList, tmp.id) == false) {
+			cout << "Please input student id again!" << endl;
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cin >> tmp.id;
+		}
 		cin.get();
 		cout << "Student id: " << tmp.id << endl;
 
@@ -49,7 +56,7 @@ void input_students_info(TY_StudentList* vList, int n)
 
 		cout << "Input student score: ";
 		cin >> tmp.score;
-		while (!cin) {
+		while (!cin || tmp.score<0 || tmp.score>10) {
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			cin >> tmp.score;
@@ -59,4 +66,13 @@ void input_students_info(TY_StudentList* vList, int n)
 		vList->push_back(tmp);
 	}
 	return;
+}
+
+bool check_valid_id(TY_StudentList *vList, int n) {
+	for (auto tmp : *vList) {
+		if (n == tmp.id) {
+			return false;
+		}
+	}
+	return true;
 }
