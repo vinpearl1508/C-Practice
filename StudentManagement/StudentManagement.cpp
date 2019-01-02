@@ -17,6 +17,7 @@ void input_students_info(TY_StudentList* vList, int n);
 bool check_valid_id(TY_StudentList* vList, int n);
 void save_file(TY_StudentList* vList);
 void load_file(TY_StudentList *vList);
+void print_menu(void);
 
 int main()
 {
@@ -131,4 +132,15 @@ void load_file(TY_StudentList *vList) {
 		cout << "File load successful" << endl;
 	}
 	fi.close();
+}
+
+void print_menu() {
+	cout << "--------------------MENU--------------------" << endl;
+	cout << "\t1. Input" << endl;
+	cout << "\t2. Display" << endl;
+	cout << "\t3. Save to file" << endl;
+	cout << "\t4. Load from file" << endl;
+	cout << "\t0. Exit" << endl;
+	cout << "--------------------------------------------" << endl;
+	cout << "Choose: ";
 }
