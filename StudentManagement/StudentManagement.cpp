@@ -18,9 +18,51 @@ bool check_valid_id(TY_StudentList* vList, int n);
 void save_file(TY_StudentList* vList);
 void load_file(TY_StudentList *vList);
 void print_menu(void);
+void display_list(TY_StudentList* vList);
 
 int main()
 {
+	int select;
+	static int numberOfStudents = 0;
+	TY_StudentList vList;
+
+	while (1)
+	{
+		print_menu();
+		cin >> select;
+		system("cls");
+		switch (select)
+		{
+			case 1:
+				
+				numberOfStudents = input_number_of_students();
+				input_students_info(&vList, numberOfStudents);
+				system("cls");
+				break;
+			case 2:
+				display_list(&vList);
+				system("pause");
+				system("cls");
+				break;
+			case 3:
+				save_file(&vList);
+				system("pause");
+				system("cls");
+				break;
+			case 4:
+				load_file(&vList);
+				system("pause");
+				system("cls");
+				break;
+			case 0:
+				vList.clear();
+				exit(1);
+				break;
+			default:
+				break;
+		}
+	}
+	system("pause");
     return 0;
 }
 
@@ -151,8 +193,8 @@ void display_list(TY_StudentList *vList) {
 		return;
 	}
 		
-	cout << "ID" << "\t\t" << "FULL NAME" << "\t\t" << "SCORE" << endl;
+	cout << setw(10) << left << "ID" << setw(20) << left << "FULL NAME" << setw(10) << left << "SCORE" << endl;
 	for (auto tmp : *vList) {
-		cout << tmp.id << "\t\t" << tmp.name << "\t\t" << tmp.score << endl;
+		cout << setw(10) << left << tmp.id << setw(20) << left << tmp.name << setw(10) << left << tmp.score << endl;
 	}
 }
