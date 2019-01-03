@@ -10,7 +10,8 @@ public:
 	int getX();
 	void setY(int mPosY);
 	int getY();
-	float distance(MyPoint p);
+	/*float distance(MyPoint p);*/
+	float distance(MyPoint *p);
 private:
 	int mPosX, mPosY;
 };

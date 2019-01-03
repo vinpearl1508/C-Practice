@@ -34,6 +34,10 @@ int MyPoint::getY() {
 	return mPosY;
 }
 
-float MyPoint::distance(MyPoint p) {
-	return sqrt(pow(p.getX() - this->mPosX, 2) + pow(p.getY() - this->mPosY, 2));
+//float MyPoint::distance(MyPoint p) {
+//	return sqrt(pow(p.getX() - this->mPosX, 2) + pow(p.getY() - this->mPosY, 2));
+//}
+
+float MyPoint::distance(MyPoint *p) {
+	return sqrt(pow(p->getX() - this->mPosX, 2) + pow(p->getY() - this->mPosY, 2));
 }
