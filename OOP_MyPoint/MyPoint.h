@@ -5,7 +5,7 @@ class MyPoint
 public:
 	MyPoint();
 	MyPoint(int mPosX, int mPosY);
-	void Display();
+	void display();
 	void setX(int mPosX);
 	int getX();
 	void setY(int mPosY);
