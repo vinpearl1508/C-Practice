@@ -1,6 +1,7 @@
 #ifndef FLU_VIRUS_H
 #define FLU_VIRUS_H
 #include "Virus.h"
+#include <vector>
 //Inherit Virus
 class fluVirus : public virus
 {
