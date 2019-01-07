@@ -11,8 +11,10 @@ dengueVirus::dengueVirus() {
 dengueVirus::~dengueVirus() {
 	setM_protein("");
 }
-dengueVirus::dengueVirus(const dengueVirus* dengueVirus) {
-	*this = *dengueVirus;
+dengueVirus::dengueVirus(const dengueVirus& dengueVirus) : virus(dengueVirus)
+{
+	//*this = *dengueVirus;
+	this->m_protein[4] = dengueVirus.m_protein[4];
 }
 
 void dengueVirus::doBorn() {
@@ -30,9 +32,9 @@ void dengueVirus::doBorn() {
 }
 vector<virus*> dengueVirus::doClone() {
 	vector<virus*> virusList;
-	dengueVirus *newDengueVirus1 = new dengueVirus(this);
+	dengueVirus *newDengueVirus1 = new dengueVirus(*this);
 	virusList.push_back(newDengueVirus1);
-	dengueVirus *newDengueVirus2 = new dengueVirus(this);
+	dengueVirus *newDengueVirus2 = new dengueVirus(*this);
 	virusList.push_back(newDengueVirus2);
 	return virusList;
 }

@@ -10,9 +10,10 @@ fluVirus::fluVirus() {
 fluVirus::~fluVirus() {
 	m_color = 0;
 }
-fluVirus::fluVirus(const fluVirus* fluVirus) {
+fluVirus::fluVirus(const fluVirus& fluVirus) : virus(fluVirus){
 	//Copy all attributes of current virus
-	*this = *fluVirus;
+	//*this = *fluVirus;
+	this->m_color = fluVirus.m_color;
 }
 
 void fluVirus::doBorn() {
@@ -27,7 +28,7 @@ void fluVirus::doBorn() {
 }
 vector<virus*> fluVirus::doClone() {
 	vector<virus*> virusList;
-	fluVirus *newFluVirus = new fluVirus(this);
+	fluVirus *newFluVirus = new fluVirus(*this);
 	virusList.push_back(newFluVirus);
 	return virusList;
 }

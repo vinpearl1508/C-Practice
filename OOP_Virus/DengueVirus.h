@@ -12,7 +12,7 @@ public:
 	//Destructor
 	~dengueVirus();
 	//Copy Constructor
-	dengueVirus(const dengueVirus*);
+	dengueVirus(const dengueVirus&);
 
 	//Call LoadADNInformation() and randomly initialize protein for Dengue Virus
 	void doBorn() override;

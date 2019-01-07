@@ -11,7 +11,7 @@ public:
 	//Destructor
 	~fluVirus();
 	//Copy Constructor
-	fluVirus(const fluVirus*);
+	fluVirus(const fluVirus&);
 
 	//Call LoadADNInformation() and randomly initialize Flu m_color
 	void doBorn() override;
