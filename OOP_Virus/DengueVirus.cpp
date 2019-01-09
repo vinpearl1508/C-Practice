@@ -2,6 +2,10 @@
 #include "Virus.h"
 #include "FluVirus.h"
 #include "DengueVirus.h"
+#include <cstring>
+
+#include <cstdlib> // For srand()
+#include <ctime> // For time
 using namespace std;
 
 dengueVirus::dengueVirus() {
@@ -9,25 +13,28 @@ dengueVirus::dengueVirus() {
 	initResistance();
 }
 dengueVirus::~dengueVirus() {
-	setM_protein("");
+	doDie();
 }
 dengueVirus::dengueVirus(const dengueVirus& dengueVirus) : virus(dengueVirus)
 {
 	//*this = *dengueVirus;
-	this->m_protein[4] = dengueVirus.m_protein[4];
+	strcpy_s(this->m_protein, dengueVirus.m_protein);
 }
 
 void dengueVirus::doBorn() {
 	loadADNInformation();
+	srand(time(NULL));
 	int n = 1 + rand() % 3;
 	if (n == 1) {
-		setM_protein("NS3");
+		strcpy_s(m_protein, "NS3");
+
 	}
 	else if (n == 2) {
-		setM_protein("NS5");
+		strcpy_s(m_protein, "NS5");
+
 	}
 	else {
-		setM_protein("E");
+		strcpy_s(m_protein, "E");
 	}
 }
 vector<virus*> dengueVirus::doClone() {
@@ -39,7 +46,7 @@ vector<virus*> dengueVirus::doClone() {
 	return virusList;
 }
 void dengueVirus::doDie() {
-	this->~dengueVirus();
+
 }
 void dengueVirus::initResistance() {
 	if (m_protein == "NS3") {
@@ -53,9 +60,9 @@ void dengueVirus::initResistance() {
 	}
 }
 
-void dengueVirus::setM_protein(char m_protein[4]) {
-	this->m_protein[4] = m_protein[4];
+void dengueVirus::setM_protein(char* m_protein) {
+	strcpy_s(this->m_protein, m_protein);
 }
-char dengueVirus::getM_protein() {
-	return m_protein[4];
+char* dengueVirus::getM_protein() {
+	return m_protein;
 }

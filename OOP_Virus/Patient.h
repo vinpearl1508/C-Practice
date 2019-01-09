@@ -15,10 +15,11 @@ public:
 	void initResistance();
 	//Initialize all virus randomly(around 10 – 20 virus) and add them to m_virusList
 	void doStart();
-	void takeMedicine();
+	void takeMedicine(int);
 	void doDie();
 	int getState();
 	std::vector<virus*> getM_virusList();
+	int getM_resistance();
 private:
 	int m_resistance; //His natural resitance
 	std::vector<virus*> m_virusList; //The current virus in his body

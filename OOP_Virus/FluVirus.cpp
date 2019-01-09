@@ -1,6 +1,9 @@
 #include<iostream>
 #include "Virus.h"
 #include "FluVirus.h"
+
+#include <cstdlib> // For srand()
+#include <ctime> // For time
 using namespace std;
 
 fluVirus::fluVirus() {
@@ -8,7 +11,7 @@ fluVirus::fluVirus() {
 	initResistance();
 }
 fluVirus::~fluVirus() {
-	m_color = 0;
+
 }
 fluVirus::fluVirus(const fluVirus& fluVirus) : virus(fluVirus){
 	//Copy all attributes of current virus
@@ -18,6 +21,7 @@ fluVirus::fluVirus(const fluVirus& fluVirus) : virus(fluVirus){
 
 void fluVirus::doBorn() {
 	loadADNInformation();
+	srand(time(NULL));
 	int n = 1 + rand() % 2;
 	if (n == 1) {
 		m_color = BLUE;
@@ -33,10 +37,10 @@ vector<virus*> fluVirus::doClone() {
 	return virusList;
 }
 void fluVirus::doDie() {
-	this->~fluVirus();
-	cout << "The virus was died";
+	
 }
 void fluVirus::initResistance() {
+	srand(time(NULL));
 	if (m_color == RED) {
 		setM_resistance(10 + rand() % 11); // 10 - 20
 	}

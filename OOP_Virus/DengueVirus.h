@@ -23,9 +23,9 @@ public:
 	//Initialize the resistance (m_resistance) of virus to medicine and store it in m_resistance
 	void initResistance() override;
 
-	//Setter, getter methods
-	void setM_protein(char[4]);
-	char getM_protein();
+	//Getter method
+	void setM_protein(char*);
+	char* getM_protein();
 private:
 	//Protein in virus represent the type of Dengue virus
 	char m_protein[4];

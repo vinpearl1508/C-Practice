@@ -12,7 +12,7 @@ public:
 	virus(const virus&);
 	//Load DNA information from a ATGX.bin and store it in m_dna
 	void loadADNInformation();
-	//when a Patient call TakeMedicine, the medicine has the medicine_resistance and it will reduce the resistance of virus
+	//When a Patient call TakeMedicine, the medicine has the medicine_resistance and it will reduce the resistance of virus
 	void reduceResistance(int);
 	
 	//Virus is an abstract class with pure virtual function
@@ -27,9 +27,9 @@ public:
 	void setM_resistance(int);
 	int getM_resistance();
 private:
-	//store the order of acid nucleic sequence
+	//Store the order of acid nucleic sequence
 	char* m_dna;
-	//the virus resistance ability(10 – 30)
+	//The virus resistance ability(10 – 30)
 	int m_resistance;
 };
 #endif // !VIRUS_H

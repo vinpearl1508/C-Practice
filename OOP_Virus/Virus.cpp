@@ -5,12 +5,9 @@
 using namespace std;
 
 virus::virus() {
-	m_dna = new char;
-	m_resistance = 10 + rand() % 21; //rand num between 10 & 30 return a + rand() % (b-a+1)
+	m_dna = new char[50];
 }
 virus::~virus() {
-	delete[] m_dna;
-	m_resistance = 0;
 }
 virus::virus(const virus& virus) {
 	this->m_dna = virus.m_dna;
@@ -24,24 +21,19 @@ void virus::loadADNInformation() {
 		cout << "File load failed" << endl;
 	}
 	else {
-		string line;
-		const char* m_dna;
 		while (!fi.eof())
 		{
-			getline(fi, line);
-			if (line == "") {
-				break;
-			}
-			m_dna = line.c_str();
+			fi >> m_dna;
 		}
-		cout << "File load successful" << endl;
+		//cout << "File load successful" << endl;
 	}
 	fi.close();
 }
 void virus::reduceResistance(int medicine_resistance) {
-	m_resistance = m_resistance - medicine_resistance;
+	m_resistance -= medicine_resistance;
 	if (m_resistance <= 0) {
-		cout << "The virus was destroyed!";
+		doDie();
+		//cout << "The virus was destroyed!" << endl;
 	}
 }
 

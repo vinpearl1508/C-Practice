@@ -22,11 +22,11 @@ public:
 	//Set value for m_resistance
 	void initResistance() override;
 	
-	//Setter, getter methods
+	//Setter, getter method
 	void setM_color(int);
 	int getM_color();
 private:
-	//the color of Flu virus is blue or red
+	//The color of Flu virus is blue or red
 	int m_color;
 	enum Color
 	{
